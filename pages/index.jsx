@@ -27,16 +27,16 @@ export default function Home() {
     // }
     // if student id and password is not empty, redirect to order page
     if (data.studentId !== "" && data.password !== "") {
-      router.push("/order");
-      // try {
-      //   const res = await axios.post("http://localhost:3000/api/user/signUp", {
-      //     studentId: parseInt(data.studentId),
-      //     password: data.password,
-      //   });
-      //   console.log(res);
-      // } catch (err) {
-      //   console.log(err);
-      // }
+      try {
+        const res = await axios.post("http://localhost:3000/api/user/signUp", {
+          studentId: parseInt(data.studentId),
+          password: data.password,
+        });
+        console.log(res.data);
+        router.push("/order");
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   // create a form that accept student id and password
