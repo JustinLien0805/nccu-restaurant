@@ -3,9 +3,26 @@ import Navbar from "../../components/Navbar";
 import MenuCard from "../../components/MenuCard";
 import { dateStr } from "../../utils/getDate";
 import { prisma } from "../../lib/prisma";
+import axios from "axios";
+
 const Order = ({ dishes }) => {
   const [chooseDish, setChooseDish] = useState(false);
 
+  // no main dish
+  const handleOrder = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.post("/api/order", {
+        date: dateStr,
+        Dish_id: 2,
+        token,
+      });
+    } catch (err) {
+      console.log(err);
+      alert("Please login first");
+      route.push("/");
+    }
+  };
   return (
     <div className="flex flex-col min-h-screen ">
       <Navbar />
@@ -55,9 +72,9 @@ const Order = ({ dishes }) => {
       <div className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Check Your Order</h3>
-          <p className="py-4">50元 (三配菜)</p>
+          <p className="py-4">無主餐(三配菜)</p>
           <div className="modal-action">
-            <label htmlFor="50" className="btn">
+            <label htmlFor="50" className="btn" onClick={handleOrder}>
               Confirm
             </label>
             <label htmlFor="50" className="btn">
