@@ -2,14 +2,15 @@ import React from "react";
 import axios from "axios";
 import { dateStr } from "../utils/getDate";
 const MenuCard = ({ id, name, ingredients, type, image }) => {
-  // get the current date
+  // send the user token to the server
 
   const handleOrder = async () => {
     try {
+      const token = localStorage.getItem("token");
       const res = await axios.post("/api/order", {
         date: dateStr,
         Dish_id: id,
-        User_studentId: 1,
+        token,
       });
       console.log(res);
     } catch (err) {

@@ -1,40 +1,35 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import RatingCardList from "../../components/RatingCardList";
 import { FcLike } from "react-icons/fc";
 import { HiXCircle } from "react-icons/hi";
 import axios from "axios";
+import { prisma } from "../../lib/prisma";
 
-const data = [
-  {
-    id: 0,
-    name: "鍋燒意麵",
-    ingredients: "青菜、蝦、蛋、豬肉片、火鍋料、意麵",
-    type: "葷",
-    image: "",
-  },
-  {
-    id: 1,
-    name: "鍋燒意麵2",
-    ingredients: "青菜、蝦、蛋、豬肉片、火鍋料、意麵",
-    type: "葷",
-    image: "",
-  },
-];
-const Rating = () => {
+const Rating = ({ dishes }) => {
   const [message, setMessage] = useState("");
+  const [removeId, setRemoveId] = useState(0);
+  const [newDishes, setNewDishes] = useState(dishes);
+  function removeItem(id) {
+    console.log("remove", id);
+    setNewDishes(newDishes.filter((dish) => dish.id !== id));
+    setRemoveId((prev) => prev + 1);
+  }
+
   const handleRating = async (rating) => {
     try {
+      const token = localStorage.getItem("token");
       const res = await axios.post("/api/rating", {
         rating: rating,
-        Dish_id: 0,
-        User_studentId: 1,
+        Dish_id: removeId,
+        token,
       });
       console.log(res);
     } catch (err) {
       console.log(err);
     }
   };
+  console.log(removeId);
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -44,29 +39,36 @@ const Rating = () => {
           {/* <p className="text-xl font-bold w-full text-left">
             Swipe left or right to rate the dishes
           </p> */}
-          {message && (
+          {newDishes.length > 0 && (
             <h2 className="text-4xl font-bold w-full text-center">{message}</h2>
           )}
           <div className="stack">
-            <RatingCardList data={data} />
-            <div className="w-full text-center">Thanks for your feedback</div>
+            <RatingCardList dishes={newDishes} />
+            {newDishes.length === 0 && (
+              <div className="w-full text-center">Thanks for your feedback</div>
+            )}
           </div>
-          <div className="flex">
-            <HiXCircle
-              className="flex-1 w-20 h-20 cursor-pointer"
-              onClick={() => {
-                handleRating(0);
-                setMessage("Dislike");
-              }}
-            />
-            <FcLike
-              className="flex-1 w-20 h-20 cursor-pointer"
-              onClick={() => {
-                // handleRating(1);
-                setMessage("Like");
-              }}
-            />
-          </div>
+
+          {newDishes.length > 0 && (
+            <div className="flex">
+              <HiXCircle
+                className="flex-1 w-20 h-20 cursor-pointer"
+                onClick={() => {
+                  handleRating(0);
+                  setMessage("Dislike");
+                  removeItem(removeId);
+                }}
+              />
+              <FcLike
+                className="flex-1 w-20 h-20 cursor-pointer"
+                onClick={() => {
+                  handleRating(1);
+                  setMessage("Like");
+                  removeItem(removeId);
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -74,3 +76,12 @@ const Rating = () => {
 };
 
 export default Rating;
+
+export async function getServerSideProps() {
+  const dishes = await prisma.dish.findMany();
+  return {
+    props: {
+      dishes,
+    },
+  };
+}

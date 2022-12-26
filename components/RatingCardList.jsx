@@ -6,21 +6,13 @@ import {
   useTransform,
 } from "framer-motion";
 
-const RatingCardList = ({ data }) => {
-  const [items, setItems] = useState(data);
+const RatingCardList = ({ dishes }) => {
+  console.log(dishes)
   const [direction, setDirection] = useState(0);
-
-  function removeItem(id) {
-    console.log(id);
-    setItems(items.filter((item) => item.id !== id));
-  }
-  useEffect(() => {
-    console.log("items", items);
-  }, [items]);
 
   return (
     <>
-      {items.map((item, index) => (
+      {dishes.map((dish, index) => (
         <motion.div
           className="card bg-gray-700 shadow-xl"
           key={index}
@@ -31,11 +23,9 @@ const RatingCardList = ({ data }) => {
           onDragEnd={(event, info) => {
             if (info.point.x > 150) {
               setDirection(1);
-              removeItem(item.id);
             }
             if (info.point.x < -150) {
               setDirection(-1);
-              removeItem(item.id);
             }
             console.log(info.point.x);
           }}
@@ -49,18 +39,17 @@ const RatingCardList = ({ data }) => {
           </figure>
           <div className="card-body cursor-pointer">
             <h2 className="card-title">
-              {item.name}
+              {dish.name}
               <div className="badge badge-accent badge-outline">
                 {" "}
-                {item.type}
+                {dish.type}
               </div>
             </h2>
 
-            <p>內容物: {item.ingredients}</p>
+            <p>內容物: {dish.ingredients}</p>
           </div>
         </motion.div>
       ))}
-      
     </>
   );
 };

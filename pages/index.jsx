@@ -21,6 +21,8 @@ export default function Home() {
           password: data.password,
         });
         if (!res.data.error) {
+          // store jwt token in local storage
+          localStorage.setItem("token", res.data.token);
           router.push("/order");
         } else {
           setError(res.data.error);

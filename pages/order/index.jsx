@@ -5,7 +5,7 @@ import { dateStr } from "../../utils/getDate";
 import { prisma } from "../../lib/prisma";
 const Order = ({ dishes }) => {
   const [chooseDish, setChooseDish] = useState(false);
-  console.log(dishes);
+
   return (
     <div className="flex flex-col min-h-screen ">
       <Navbar />
@@ -38,6 +38,7 @@ const Order = ({ dishes }) => {
             <div className="grid md:grid-cols-2 gap-6 md:gap-4">
               {dishes.map((dish) => (
                 <MenuCard
+                  key={dish.id}
                   id={dish.id}
                   name={dish.name}
                   ingredients={dish.ingredients}
