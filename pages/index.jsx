@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
+
 export default function Home() {
   const router = useRouter();
   const {
@@ -28,7 +29,7 @@ export default function Home() {
     // if student id and password is not empty, redirect to order page
     if (data.studentId !== "" && data.password !== "") {
       try {
-        const res = await axios.post("http://localhost:3000/api/user/signUp", {
+        const res = await axios.post("/api/user/signUp", {
           studentId: parseInt(data.studentId),
           password: data.password,
         });
