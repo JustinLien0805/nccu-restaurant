@@ -5,8 +5,9 @@ import { FcLike } from "react-icons/fc";
 import { HiXCircle } from "react-icons/hi";
 import axios from "axios";
 import { prisma } from "../../lib/prisma";
-
+import { useRouter } from "next/router";
 const Rating = ({ dishes }) => {
+  const route = useRouter();
   const [message, setMessage] = useState("");
   const [removeId, setRemoveId] = useState(0);
   const [newDishes, setNewDishes] = useState(dishes);
@@ -24,9 +25,11 @@ const Rating = ({ dishes }) => {
         Dish_id: removeId,
         token,
       });
-      console.log(res);
+
     } catch (err) {
       console.log(err);
+      alert("Please login first");
+      route.push("/");
     }
   };
   console.log(removeId);

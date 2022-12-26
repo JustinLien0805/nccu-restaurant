@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { dateStr } from "../utils/getDate";
+import { useRouter } from "next/router";
 const MenuCard = ({ id, name, ingredients, type, image }) => {
   // send the user token to the server
-
+  const route = useRouter();
   const handleOrder = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -12,9 +13,10 @@ const MenuCard = ({ id, name, ingredients, type, image }) => {
         Dish_id: id,
         token,
       });
-      console.log(res);
     } catch (err) {
       console.log(err);
+      alert("Please login first");
+      route.push("/");
     }
   };
 
