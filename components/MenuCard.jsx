@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { NEXT_URL } from "../../url";
 const MenuCard = ({ id, name, ingredients, type, image }) => {
   // get the current date
   const date = new Date();
@@ -9,15 +8,15 @@ const MenuCard = ({ id, name, ingredients, type, image }) => {
   const dateStr = `${month}月${day}日`;
 
   const handleOrder = async () => {
-    try {
-      const res = await axios.post(`${NEXT_URL}/api/order`, {
-        date: dateStr,
-        Dish_id: id,
-        User_studentId: 1,
-      });
-      console.log(res);
-    } catch (err) {
-      console.log(err);
+    try{
+    const res = await axios.post("/api/order", {
+      date: dateStr,
+      Dish_id: id,
+      User_studentId: 1,
+    });
+    console.log(res)}
+    catch(err){
+      console.log(err)
     }
   };
 

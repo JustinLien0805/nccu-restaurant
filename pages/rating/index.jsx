@@ -4,7 +4,7 @@ import RatingCardList from "../../components/RatingCardList";
 import { FcLike } from "react-icons/fc";
 import { HiXCircle } from "react-icons/hi";
 import axios from "axios";
-import { NEXT_URL } from "../../url";
+
 const data = [
   {
     id: 0,
@@ -24,7 +24,7 @@ const data = [
 const Rating = () => {
   const handleRating = async (rating) => {
     try {
-      const res = await axios.post(`${NEXT_URL}/api/rating`, {
+      const res = await axios.post("/api/rating", {
         rating: rating,
         Dish_id: 0,
         User_studentId: 1,
