@@ -3,9 +3,11 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
+import Loader from "../../components/Loader";
 export default function SignUp() {
   const router = useRouter();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -14,7 +16,7 @@ export default function SignUp() {
   // show error if student id or password is empty
   const onSubmit = async (data) => {
     // if student id and password is not empty, redirect to order page
-    console.log(data);
+    setLoading(true);
     if (data.studentId !== "" && data.password !== "") {
       try {
         // check user exist or not, if not create a new user and redirect to login page
@@ -25,8 +27,10 @@ export default function SignUp() {
         // after create a new user, redirect to login page
         if (!res.data.error) {
           router.push("/");
+          setLoading(false);
         } else {
           setError(res.data.error);
+          setLoading(false);
         }
       } catch (err) {
         console.log(err);
@@ -37,7 +41,8 @@ export default function SignUp() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col min-h-screen justify-center items-center space-y-4">
+      <div className="flex flex-col min-h-screen justify-center items-center space-y-4 relative">
+        {loading && <Loader />}
         <h1 className="text-5xl font-bold">Sign Up</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}

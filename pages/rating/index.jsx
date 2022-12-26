@@ -16,7 +16,6 @@ const Rating = ({ dishes }) => {
     setNewDishes(newDishes.filter((dish) => dish.id !== id));
     setRemoveId((prev) => prev + 1);
   }
-
   const handleRating = async (rating) => {
     try {
       const token = localStorage.getItem("token");
