@@ -2,39 +2,29 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
-
+import { useState } from "react";
 export default function Home() {
   const router = useRouter();
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
-    watch,
-    setError,
     formState: { errors },
   } = useForm();
   // show error if student id or password is empty
   const onSubmit = async (data) => {
-    // if (data.studentId === "") {
-    //   setError("studentId", {
-    //     type: "required",
-    //     message: "Student ID is required",
-    //   });
-    // }
-    // if (data.password === "") {
-    //   setError("password", {
-    //     type: "required",
-    //     message: "Password is required",
-    //   });
-    // }
     // if student id and password is not empty, redirect to order page
     if (data.studentId !== "" && data.password !== "") {
       try {
-        const res = await axios.post("/api/user/signUp", {
+        const res = await axios.post("/api/user/signIn", {
           studentId: parseInt(data.studentId),
           password: data.password,
         });
-        console.log(res.data);
-        router.push("/order");
+        if (!res.data.error) {
+          router.push("/order");
+        } else {
+          setError(res.data.error);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -52,7 +42,7 @@ export default function Home() {
       <h1 className="text-5xl font-bold">NCCU</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col justify-center items-center space-y-4 w-2/3"
+        className="flex flex-col justify-center items-center space-y-6 w-2/3"
       >
         <input
           type="text"
@@ -60,21 +50,38 @@ export default function Home() {
           className="input input-bordered w-full max-w-md"
           {...register("studentId", { required: true })}
         />
-        {/* {errors.studentId && (
-          <p className="text-red-500">{errors.studentId.message} 3333</p>
-        )} */}
+        {errors.studentId && (
+          <p className="text-red-500 w-full text-right">
+            this field is required
+          </p>
+        )}
         <input
           type="text"
           placeholder="Password"
           className="input input-bordered w-full max-w-md"
           {...register("password", { required: true })}
         />
-        {/* {errors.password && (
-          <p className="text-red-500">{errors.password.message}</p>
-        )} */}
-        <button className="btn w-full max-w-md" type="submit">
-          Sign In
-        </button>
+        {errors.password && (
+          <p className="text-red-500 w-full text-right">
+            this field is required
+          </p>
+        )}
+        {error && <p className="text-red-500">{error}</p>}
+
+        <div className="flex flex-col w-full border-opacity-50 max-w-md items-center justify-center">
+          <button className="btn w-full max-w-md" type="submit">
+            Sign In
+          </button>
+          <div className="divider">OR</div>
+          <label
+            className="btn w-full max-w-md"
+            onClick={() => {
+              router.push("/signUp");
+            }}
+          >
+            Sign Up
+          </label>
+        </div>
       </form>
     </div>
   );

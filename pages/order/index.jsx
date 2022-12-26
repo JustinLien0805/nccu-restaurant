@@ -1,15 +1,11 @@
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import MenuCard from "../../components/MenuCard";
-const Order = () => {
+import { dateStr } from "../../utils/getDate";
+import { prisma } from "../../lib/prisma";
+const Order = ({ dishes }) => {
   const [chooseDish, setChooseDish] = useState(false);
-  // get Tommorow's date month and day
-  const date = new Date();
-  date.setDate(date.getDate() + 1);
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const dateStr = `${month}月${day}日`;
-  
+  console.log(dishes);
   return (
     <div className="flex flex-col min-h-screen ">
       <Navbar />
@@ -40,27 +36,15 @@ const Order = () => {
           <>
             <h2 className="text-4xl font-bold">Choose Your Main Dish</h2>
             <div className="grid md:grid-cols-2 gap-6 md:gap-4">
-              <MenuCard
-                id={0}
-                name="鍋燒意麵"
-                ingredients="青菜、蝦、蛋、豬肉片、火鍋料、意麵"
-                type="葷"
-                image=""
-              />
-              <MenuCard
-                id={1}
-                name="烤鯖魚"
-                ingredients="鯖魚"
-                type="葷"
-                image=""
-              />
-              <MenuCard
-                id={2}
-                name="味噌杏鮑菇"
-                ingredients="味噌、杏鮑菇"
-                type="素"
-                image=""
-              />
+              {dishes.map((dish) => (
+                <MenuCard
+                  id={dish.id}
+                  name={dish.name}
+                  ingredients={dish.ingredients}
+                  type={dish.type}
+                  image={dish.image}
+                />
+              ))}
             </div>
           </>
         )}
@@ -86,3 +70,12 @@ const Order = () => {
 };
 
 export default Order;
+
+export async function getServerSideProps() {
+  const dishes = await prisma.dish.findMany();
+  return {
+    props: {
+      dishes,
+    },
+  };
+}

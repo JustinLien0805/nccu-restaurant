@@ -1,22 +1,19 @@
 import React from "react";
 import axios from "axios";
+import { dateStr } from "../utils/getDate";
 const MenuCard = ({ id, name, ingredients, type, image }) => {
   // get the current date
-  const date = new Date();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const dateStr = `${month}月${day}日`;
 
   const handleOrder = async () => {
-    try{
-    const res = await axios.post("/api/order", {
-      date: dateStr,
-      Dish_id: id,
-      User_studentId: 1,
-    });
-    console.log(res)}
-    catch(err){
-      console.log(err)
+    try {
+      const res = await axios.post("/api/order", {
+        date: dateStr,
+        Dish_id: id,
+        User_studentId: 1,
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
     }
   };
 
