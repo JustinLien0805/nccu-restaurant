@@ -30,7 +30,7 @@ const Navbar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a className="active:bg-black" onClick={() => handlePush("/Order")}>
+            <a className="active:bg-black" onClick={() => handlePush("/order")}>
               Pre-Order
             </a>
           </li>
