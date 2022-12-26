@@ -4,7 +4,7 @@ import RatingCardList from "../../components/RatingCardList";
 import { FcLike } from "react-icons/fc";
 import { HiXCircle } from "react-icons/hi";
 import axios from "axios";
-import { NEXT_URL } from "../url";
+import { NEXT_URL } from "../../url";
 const data = [
   {
     id: 0,

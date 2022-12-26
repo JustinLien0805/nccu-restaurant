@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { NEXT_URL } from "../url";
+import { NEXT_URL } from "../../url";
 const MenuCard = ({ id, name, ingredients, type, image }) => {
   // get the current date
   const date = new Date();
