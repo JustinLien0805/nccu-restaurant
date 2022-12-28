@@ -48,28 +48,44 @@ export default function SignUp() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col justify-center items-center space-y-6 w-2/3"
         >
-          <input
-            type="text"
-            placeholder="Sutdent ID"
-            className="input input-bordered w-full max-w-md"
-            {...register("studentId", { required: true })}
-          />
-          {errors.studentId && (
-            <p className="text-red-500 w-full text-right">
-              this field is required
-            </p>
-          )}
-          <input
-            type="text"
-            placeholder="Password"
-            className="input input-bordered w-full max-w-md"
-            {...register("password", { required: true })}
-          />
-          {errors.password && (
-            <p className="text-red-500 w-full text-right">
-              this field is required
-            </p>
-          )}
+          <div className="form-control w-full max-w-md">
+            <label className="label">
+              <span className="label-text">Student ID</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Sutdent ID"
+              className="input input-bordered w-full"
+              {...register("studentId", { required: true })}
+            />
+            {errors.studentId && (
+              <label className="label">
+                <span className="label-text-alt text-red-500 w-full text-right">
+                  this field is required
+                </span>
+              </label>
+            )}
+          </div>
+
+          <div className="form-control w-full max-w-md">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Sutdent ID"
+              className="input input-bordered w-full"
+              {...register("password", { required: true })}
+            />
+            {errors.password && (
+              <label className="label">
+                <span className="label-text-alt text-red-500 w-full text-right">
+                  this field is required
+                </span>
+              </label>
+            )}
+          </div>
+          
           {error && <p className="text-red-500">{error}</p>}
 
           <div className="flex flex-col w-full border-opacity-50 max-w-md items-center justify-center">

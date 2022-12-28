@@ -4,27 +4,36 @@ import MenuCard from "../../components/MenuCard";
 import { dateStr } from "../../utils/getDate";
 import { prisma } from "../../lib/prisma";
 import axios from "axios";
-
+import Loader from "../../components/Loader";
+import { useRouter } from "next/router";
 const Order = ({ dishes }) => {
   const [chooseDish, setChooseDish] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const route = useRouter();
   // no main dish
   const handleOrder = async () => {
     try {
+      setLoading(true);
       const token = localStorage.getItem("token");
       const res = await axios.post("/api/order", {
         date: dateStr,
         Dish_id: 2,
         token,
       });
+      if (res) {
+        alert("Order Success");
+        setLoading(false);
+      }
     } catch (err) {
       console.log(err);
+      setLoading(false);
       alert("Please login first");
       route.push("/");
     }
   };
   return (
-    <div className="flex flex-col min-h-screen ">
+    <div className="flex flex-col min-h-screen relative">
+      {loading && <Loader />}
       <Navbar />
       <div className="flex flex-col justify-center items-center p-6 space-y-6 mt-20">
         <h2 className="text-4xl font-bold w-full text-left">
