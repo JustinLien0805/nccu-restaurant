@@ -13,10 +13,15 @@ const MenuCard = ({ id, name, ingredients, type, image }) => {
         Dish_id: id,
         token,
       });
+      if (res.data.message) {
+        alert(res.data.message);
+        if (res.data.message !== "You already ordered") route.push("/");
+      } else {
+        alert("Order Success");
+      }
     } catch (err) {
       console.log(err);
-      alert("Please login first");
-      route.push("/");
+      alert("You already ordered");
     }
   };
 

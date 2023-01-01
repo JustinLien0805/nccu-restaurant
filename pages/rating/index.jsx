@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import RatingCardList from "../../components/RatingCardList";
 import { FcLike } from "react-icons/fc";
@@ -6,6 +6,7 @@ import { HiXCircle } from "react-icons/hi";
 import axios from "axios";
 import { prisma } from "../../lib/prisma";
 import { useRouter } from "next/router";
+
 const Rating = ({ dishes }) => {
   const route = useRouter();
   const [message, setMessage] = useState("");
@@ -24,14 +25,30 @@ const Rating = ({ dishes }) => {
         Dish_id: removeId,
         token,
       });
-
+      if (res) {
+        alert("Thanks for your feedback");
+      }
     } catch (err) {
       console.log(err);
-      alert("Please login first");
-      route.push("/");
+      // alert("Please login first");
+      // route.push("/");
     }
   };
-  console.log(removeId);
+  // filter out the dishes that have been rated by the user
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    async function getUnratedDishes() {
+      const res = await axios.post("/api/userdish", {
+        token,
+      });
+      console.log(res.data);
+      setNewDishes(res.data);
+    }
+    if (token) {
+      getUnratedDishes();
+    }
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -80,6 +97,7 @@ const Rating = ({ dishes }) => {
 export default Rating;
 
 export async function getServerSideProps() {
+  // filter out the dishes that have been rated by the user
   const dishes = await prisma.dish.findMany();
   return {
     props: {

@@ -7,8 +7,7 @@ import {
 } from "framer-motion";
 
 const RatingCardList = ({ dishes }) => {
-  console.log(dishes)
-  const [direction, setDirection] = useState(0);
+  // const [direction, setDirection] = useState(0);
 
   return (
     <>
@@ -16,28 +15,28 @@ const RatingCardList = ({ dishes }) => {
         <motion.div
           className="card bg-gray-700 shadow-xl"
           key={index}
-          drag="x"
-          dragConstraints={{ left: -50, right: 50 }}
-          initial={{ x: 0, opacity: 1 }}
-          animate={{ x: 0, opacity: 1 }}
-          onDragEnd={(event, info) => {
-            if (info.point.x > 150) {
-              setDirection(1);
-            }
-            if (info.point.x < -150) {
-              setDirection(-1);
-            }
-            console.log(info.point.x);
-          }}
-          exit={{
-            x: direction > 0 ? 500 : -500,
-            opacity: 0,
-          }}
+          // drag="x"
+          // dragConstraints={{ left: -50, right: 50 }}
+          // initial={{ x: 0, opacity: 1 }}
+          // animate={{ x: 0, opacity: 1 }}
+          // onDragEnd={(event, info) => {
+          //   if (info.point.x > 150) {
+          //     setDirection(1);
+          //   }
+          //   if (info.point.x < -150) {
+          //     setDirection(-1);
+          //   }
+          //   console.log(info.point.x);
+          // }}
+          // exit={{
+          //   x: direction > 0 ? 500 : -500,
+          //   opacity: 0,
+          // }}
         >
           <figure>
             <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
           </figure>
-          <div className="card-body cursor-pointer">
+          <div className="card-body">
             <h2 className="card-title">
               {dish.name}
               <div className="badge badge-accent badge-outline">

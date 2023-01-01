@@ -20,15 +20,17 @@ const Order = ({ dishes }) => {
         Dish_id: 2,
         token,
       });
-      if (res) {
+      if (res.data.message) {
+        alert(res.data.message);
+        if (res.data.message !== "You already ordered") route.push("/");
+      } else {
         alert("Order Success");
-        setLoading(false);
       }
+      setLoading(false);
     } catch (err) {
       console.log(err);
+      alert("You already ordered");
       setLoading(false);
-      alert("Please login first");
-      route.push("/");
     }
   };
   return (
