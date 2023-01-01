@@ -25,9 +25,6 @@ const Rating = ({ dishes }) => {
         Dish_id: removeId,
         token,
       });
-      if (res) {
-        console.log(res.data.message);
-      }
     } catch (err) {
       console.log(err);
       alert("Please login first");

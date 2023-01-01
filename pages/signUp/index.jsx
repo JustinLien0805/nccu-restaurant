@@ -18,7 +18,6 @@ export default function SignUp() {
   const onSubmit = async (data) => {
     // if student id and password is not empty, redirect to order page
     setLoading(true);
-    console.log(data);
     if (
       data.studentId !== "" &&
       data.password !== "" &&
