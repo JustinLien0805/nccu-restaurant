@@ -104,11 +104,12 @@ export default function SignUp() {
               {...register("gender", { required: true })}
               defaultValue=""
             >
-              <option disabled selected value="">
+              <option disabled value="">
                 Pick one
               </option>
               <option value="male">Male</option>
               <option value="female">Female</option>
+              <option value="other">other</option>
             </select>
             {errors.gender && (
               <label className="label">
@@ -128,7 +129,7 @@ export default function SignUp() {
               {...register("occupation", { required: true })}
               defaultValue=""
             >
-              <option disabled selected value="">
+              <option disabled value="">
                 Pick one
               </option>
               <option value="teacher">Teacher</option>

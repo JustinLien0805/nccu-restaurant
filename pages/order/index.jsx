@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import MenuCard from "../../components/MenuCard";
-import { dateStr } from "../../utils/getDate";
+import { dateStr, formatedDate } from "../../utils/getDate";
 import { prisma } from "../../lib/prisma";
 import axios from "axios";
 import Loader from "../../components/Loader";
@@ -39,7 +39,7 @@ const Order = ({ dishes }) => {
       <Navbar />
       <div className="flex flex-col justify-center items-center p-6 space-y-6 mt-20">
         <h2 className="text-4xl font-bold w-full text-left">
-          Menu for {dateStr}
+          Menu for {formatedDate}
         </h2>
         <h3 className="text-3xl font-bold w-full text-left">
           Choose Your Plan
