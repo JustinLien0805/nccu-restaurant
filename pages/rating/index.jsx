@@ -26,28 +26,28 @@ const Rating = ({ dishes }) => {
         token,
       });
       if (res) {
-        alert("Thanks for your feedback");
+        console.log(res.data.message);
       }
     } catch (err) {
       console.log(err);
-      // alert("Please login first");
-      // route.push("/");
+      alert("Please login first");
+      route.push("/");
     }
   };
   // filter out the dishes that have been rated by the user
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    async function getUnratedDishes() {
-      const res = await axios.post("/api/userdish", {
-        token,
-      });
-      console.log(res.data);
-      setNewDishes(res.data);
-    }
-    if (token) {
-      getUnratedDishes();
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   async function getUnratedDishes() {
+  //     const res = await axios.post("/api/userdish", {
+  //       token,
+  //     });
+  //     console.log(res.data);
+  //     setNewDishes(res.data);
+  //   }
+  //   if (token) {
+  //     getUnratedDishes();
+  //   }
+  // }, []);
 
   return (
     <div className="flex flex-col min-h-screen">

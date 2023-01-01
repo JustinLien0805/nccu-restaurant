@@ -13,7 +13,30 @@ export default async function handler(req, res) {
     return;
   }
   const User_studentId = decoded.studentId;
-  console.log(User_studentId, Dish_id);
+  // check if the user has already rated the dish and if so, update the rating
+  const existingRating = await prisma.rating.findFirst({
+    where: {
+      Dish_id,
+      User_studentId,
+    },
+  });
+  if (existingRating) {
+    // update the rating where Dishid and User_studentId
+    const updatedRating = await prisma.rating.update({
+      where: {
+        User_studentId_Dish_id: {
+          Dish_id: existingRating.Dish_id,
+          User_studentId: existingRating.User_studentId,
+        },
+      },
+      data: {
+        rating,
+      },
+    });
+    res.json({ message: "Rating updated." });
+    return;
+  }
+
   const order = await prisma.rating.create({
     data: {
       Dish_id,
@@ -21,5 +44,5 @@ export default async function handler(req, res) {
       rating,
     },
   });
-  res.json(order);
+  res.json({ message: "Rating created." });
 }
