@@ -13,19 +13,29 @@ export default function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   // show error if student id or password is empty
   const onSubmit = async (data) => {
     // if student id and password is not empty, redirect to order page
     setLoading(true);
-    if (data.studentId !== "" && data.password !== "") {
+    console.log(data);
+    if (
+      data.studentId !== "" &&
+      data.password !== "" &&
+      data.gender !== "" &&
+      data.occupation !== ""
+    ) {
       try {
         // check user exist or not, if not create a new user and redirect to login page
         const res = await axios.post("/api/user/signUp", {
           studentId: parseInt(data.studentId),
           password: data.password,
+          gender: data.gender,
+          occupation: data.occupation,
         });
         // after create a new user, redirect to login page
         if (!res.data.error) {
+          alert("Sign Up Success");
           router.push("/");
           setLoading(false);
         } else {
@@ -46,7 +56,7 @@ export default function SignUp() {
         <h1 className="text-5xl font-bold">Sign Up</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col justify-center items-center space-y-6 w-2/3"
+          className="flex flex-col justify-center items-center space-y-4 w-2/3"
         >
           <div className="form-control w-full max-w-md">
             <label className="label">
@@ -85,7 +95,56 @@ export default function SignUp() {
               </label>
             )}
           </div>
-          
+
+          <div className="form-control w-full max-w-md">
+            <label className="label">
+              <span className="label-text">Gender</span>
+            </label>
+            <select
+              className="select select-bordered"
+              {...register("gender", { required: true })}
+              defaultValue=""
+            >
+              <option disabled selected value="">
+                Pick one
+              </option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            {errors.gender && (
+              <label className="label">
+                <span className="label-text-alt text-red-500 w-full text-right">
+                  this field is required
+                </span>
+              </label>
+            )}
+          </div>
+
+          <div className="form-control w-full max-w-md">
+            <label className="label">
+              <span className="label-text">Occupation</span>
+            </label>
+            <select
+              className="select select-bordered"
+              {...register("occupation", { required: true })}
+              defaultValue=""
+            >
+              <option disabled selected value="">
+                Pick one
+              </option>
+              <option value="teacher">Teacher</option>
+              <option value="student">Student</option>
+            </select>
+
+            {errors.occupation && (
+              <label className="label">
+                <span className="label-text-alt text-red-500 w-full text-right">
+                  this field is required
+                </span>
+              </label>
+            )}
+          </div>
+
           {error && <p className="text-red-500">{error}</p>}
 
           <div className="flex flex-col w-full border-opacity-50 max-w-md items-center justify-center">

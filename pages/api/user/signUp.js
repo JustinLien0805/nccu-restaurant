@@ -3,7 +3,7 @@
 import { prisma } from "../../../lib/prisma";
 import { checkIfUserExists } from "../../../utils/checkIfUserExists";
 export default async function handler(req, res) {
-  const { studentId, password } = req.body;
+  const { studentId, password, gender, occupation } = req.body;
   const userExists = await checkIfUserExists(studentId);
   if (userExists) {
     res.json({ error: "User already exists" });
@@ -13,6 +13,8 @@ export default async function handler(req, res) {
     data: {
       studentId: studentId,
       Password: password,
+      gender,
+      occupation,
     },
   });
   res.json(user);
