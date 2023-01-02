@@ -13,6 +13,7 @@ const MenuCard = ({ id, name, ingredients, type, image }) => {
         Dish_id: id,
         token,
       });
+     
       if (res.data.message) {
         alert(res.data.message);
         if (res.data.message !== "You already ordered") route.push("/");
@@ -21,7 +22,7 @@ const MenuCard = ({ id, name, ingredients, type, image }) => {
       }
     } catch (err) {
       console.log(err);
-      alert("You already ordered");
+      alert("err");
     }
   };
 

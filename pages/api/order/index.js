@@ -20,16 +20,18 @@ export default async function handler(req, res) {
       date,
     },
   });
+ 
   if (existingOrder.length > 0) {
     res.json({ message: "You already ordered" });
     return;
+  } else {
+    const order = await prisma.order.create({
+      data: {
+        Dish_id,
+        User_studentId,
+        date,
+      },
+    });
+    res.json(order);
   }
-  const order = await prisma.order.create({
-    data: {
-      Dish_id,
-      User_studentId,
-      date,
-    },
-  });
-  res.json(order);
 }

@@ -21,6 +21,7 @@ const Order = ({ dishes }) => {
         Dish_id: 2,
         token,
       });
+     
       if (res.data.message) {
         alert(res.data.message);
         if (res.data.message !== "You already ordered") route.push("/");
