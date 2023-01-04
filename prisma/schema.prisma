@@ -21,7 +21,7 @@ model Dish {
   name        String   @db.VarChar(45)
   ingredients String   @db.VarChar(45)
   type        String   @db.VarChar(45)
-  image       String   @db.VarChar(45)
+  image       String   @db.VarChar(225)
   Order       Order[]
   Rating      Rating[]
 }

@@ -13,7 +13,7 @@ const MenuCard = ({ id, name, ingredients, type, image }) => {
         Dish_id: id,
         token,
       });
-     
+
       if (res.data.message) {
         alert(res.data.message);
         if (res.data.message !== "You already ordered") route.push("/");
@@ -30,7 +30,11 @@ const MenuCard = ({ id, name, ingredients, type, image }) => {
     <>
       <div className="card bg-gray-700 shadow-xl" htmlFor={name}>
         <figure>
-          <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+          <img
+            src={image}
+            alt="dish image"
+            className="w-full h-64 object-cover object-center"
+          />
         </figure>
         <div className="card-body">
           <h2 className="card-title">

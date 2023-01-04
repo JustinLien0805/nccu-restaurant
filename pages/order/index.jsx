@@ -85,6 +85,13 @@ const Order = ({ dishes }) => {
       <div className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Check Your Order</h3>
+          <figure>
+          <img
+            src={dishes[2].image}
+            alt="dish image"
+            className="w-full h-64 object-cover object-center"
+          />
+        </figure>
           <p className="py-4">無主餐(三配菜)</p>
           <div className="modal-action">
             <label htmlFor="50" className="btn" onClick={handleOrder}>
