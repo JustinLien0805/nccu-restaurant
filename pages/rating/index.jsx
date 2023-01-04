@@ -31,44 +31,35 @@ const Rating = ({ dishes }) => {
       route.push("/");
     }
   };
-  // filter out the dishes that have been rated by the user
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   async function getUnratedDishes() {
-  //     const res = await axios.post("/api/userdish", {
-  //       token,
-  //     });
-  //     console.log(res.data);
-  //     setNewDishes(res.data);
-  //   }
-  //   if (token) {
-  //     getUnratedDishes();
-  //   }
-  // }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <div className="flex flex-col justify-center items-center p-6 space-y-4 mt-12">
-        <div className="flex flex-col space-y-8">
-          <h2 className="text-4xl font-bold w-full text-left">Rating</h2>
-          {/* <p className="text-xl font-bold w-full text-left">
-            Swipe left or right to rate the dishes
-          </p> */}
+        <div className="flex flex-col items-center space-y-8">
+          <h2 className="text-4xl font-bold w-full text-center">Rating</h2>
+          <p className="text-lg font-bold w-2/3 text-center">
+            Swipe left and right or click the button to rate the dishes
+          </p>
           {newDishes.length > 0 && (
             <h2 className="text-4xl font-bold w-full text-center">{message}</h2>
           )}
           <div className="stack">
-            <RatingCardList dishes={newDishes} />
+            <RatingCardList
+              dishes={newDishes}
+              removeItem={removeItem}
+              setMessage={setMessage}
+              handleRating={handleRating}
+            />
             {newDishes.length === 0 && (
               <div className="w-full text-center">Thanks for your feedback</div>
             )}
           </div>
 
           {newDishes.length > 0 && (
-            <div className="flex">
+            <div className="flex space-x-20">
               <HiXCircle
-                className="flex-1 w-20 h-20 cursor-pointer"
+                className="flex-1 w-20 h-20 cursor-pointer hover:scale-110"
                 onClick={() => {
                   handleRating(0);
                   setMessage("Dislike");
@@ -76,7 +67,7 @@ const Rating = ({ dishes }) => {
                 }}
               />
               <FcLike
-                className="flex-1 w-20 h-20 cursor-pointer"
+                className="flex-1 w-20 h-20 cursor-pointer hover:scale-110"
                 onClick={() => {
                   handleRating(1);
                   setMessage("Like");
