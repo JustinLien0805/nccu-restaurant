@@ -10,17 +10,16 @@ export default async function handler(req, res) {
     if (userExists) {
       res.json({ error: "User already exists" });
       return;
-    } else {
-      const user = await prisma.user.create({
-        data: {
-          studentId: studentId,
-          Password: password,
-          gender: gender,
-          occupation: occupation,
-        },
-      });
-      res.json(user);
     }
+    const user = await prisma.user.create({
+      data: {
+        studentId: studentId,
+        Password: password,
+        gender: gender,
+        occupation: occupation,
+      },
+    });
+    res.json(user);
   } catch (err) {
     res.json({ error: err.message });
   }
