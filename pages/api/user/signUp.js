@@ -4,18 +4,22 @@ import { prisma } from "../../../lib/prisma";
 import { checkIfUserExists } from "../../../utils/checkIfUserExists";
 export default async function handler(req, res) {
   const { studentId, password, gender, occupation } = req.body;
-  const userExists = await checkIfUserExists(studentId);
-  if (userExists) {
-    res.json({ error: "User already exists" });
-    return;
+  try {
+    const userExists = await checkIfUserExists(studentId);
+    if (userExists) {
+      res.json({ error: "User already exists" });
+      return;
+    }
+    const user = await prisma.user.create({
+      data: {
+        studentId: studentId,
+        Password: password,
+        gender,
+        occupation,
+      },
+    });
+    res.json(user);
+  } catch (err) {
+    res.json({ error: err.message });
   }
-  const user = await prisma.user.create({
-    data: {
-      studentId: studentId,
-      Password: password,
-      gender,
-      occupation,
-    },
-  });
-  res.json(user);
 }
