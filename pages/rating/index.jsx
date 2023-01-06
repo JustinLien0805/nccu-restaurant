@@ -42,8 +42,8 @@ const Rating = ({ dishes }) => {
       <div className="flex flex-col justify-center items-center p-6 space-y-4 mt-12">
         <div className="flex flex-col items-center space-y-8">
           <h2 className="text-4xl font-bold w-full text-center">Rating</h2>
-          <p className="text-lg font-bold w-2/3 text-center">
-            Swipe left and right or click the button to rate the dishes
+          <p className="text-lg font-bold w-2/3 text-center text-accent">
+            Tips: Swipe left to dislike, swipe right to like
           </p>
           {newDishes.length > 0 && (
             <h2 className="text-4xl font-bold w-full text-center">{message}</h2>

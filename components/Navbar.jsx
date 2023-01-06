@@ -17,7 +17,7 @@ const Navbar = () => {
     <div className="navbar bg-base-100 fixed z-40">
       <div className="flex-1">
         <a
-          className="btn btn-ghost normal-case text-xl"
+          className="btn btn-ghost normal-case text-xl text-accent"
           onClick={() => {
             router.push("/");
             // remove token
@@ -30,17 +30,10 @@ const Navbar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a className="active:bg-black" onClick={() => handlePush("/order")}>
-              Pre-Order
-            </a>
+            <a onClick={() => handlePush("/order")}>Pre-Order</a>
           </li>
           <li>
-            <a
-              className="active:bg-black"
-              onClick={() => handlePush("/rating")}
-            >
-              Rating
-            </a>
+            <a onClick={() => handlePush("/rating")}>Rating</a>
           </li>
         </ul>
       </div>

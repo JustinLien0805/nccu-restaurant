@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 const Order = ({ dishes }) => {
   const [chooseDish, setChooseDish] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(dateStr)
   const route = useRouter();
   // no main dish
   const handleOrder = async () => {

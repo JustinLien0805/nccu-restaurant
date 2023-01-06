@@ -4,7 +4,7 @@ const RatingCard = ({ dish, removeItem, setMessage, handleRating }) => {
   return (
     <>
       <motion.div
-        className="card bg-gray-700 shadow-xl"
+        className="card bg-gray-700 shadow-xl active:scale-105"
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         whileDrag={{ scale: 1.05 }}
@@ -12,12 +12,12 @@ const RatingCard = ({ dish, removeItem, setMessage, handleRating }) => {
         dragElastic={0.5}
         onDragEnd={(event, info) => {
           console.log(dish.id);
-          if (info.offset.x > 150) {
+          if (info.offset.x > 200) {
             removeItem(dish.id);
             setMessage("Liked");
             handleRating(1);
           }
-          if (info.offset.x < -150) {
+          if (info.offset.x < -200) {
             removeItem(dish.id);
             setMessage("Disliked");
             handleRating(0);
