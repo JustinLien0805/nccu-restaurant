@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   try {
     const userExists = await checkIfUserExists(studentId);
     if (userExists) {
-      res.json({ error: "User already exists" });
+      res.json({ message: "User already exists" });
       return;
     }
     // create user
@@ -16,9 +16,8 @@ export default async function handler(req, res) {
       data: {
         studentId,
         Password: password,
-        gender: "male",
-        occupation: "student",
-        age: "20",
+        gender: gender,
+        occupation: occupation,
       },
     });
 

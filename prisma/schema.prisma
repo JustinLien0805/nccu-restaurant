@@ -46,7 +46,6 @@ model User {
   Password   String   @db.VarChar(45)
   gender     String   @db.VarChar(45)
   occupation String   @db.VarChar(45)
-  age        String   @db.VarChar(45)
   Order      Order[]
   Rating     Rating[]
 }

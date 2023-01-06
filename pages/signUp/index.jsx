@@ -33,16 +33,17 @@ export default function SignUp() {
           occupation: data.occupation,
         });
         // after create a new user, redirect to login page
-        if (!res.data.error) {
+        if (!res.data.message) {
           alert("Sign Up Success");
           router.push("/");
           setLoading(false);
         } else {
-          setError(res.data.error);
+          setError(res.data.message);
           setLoading(false);
         }
       } catch (err) {
         setLoading(false);
+        setError("Something went wrong, please connect us");
         console.log(err);
       }
     }
