@@ -29,6 +29,7 @@ const RatingCard = ({ dish, removeItem, setMessage, handleRating }) => {
             src={dish.image}
             alt="dish image"
             className="w-full h-64 object-cover object-center"
+            draggable="false"
           />
         </figure>
         <div className="card-body cursor-pointer">

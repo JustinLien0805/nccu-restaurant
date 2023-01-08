@@ -37,14 +37,14 @@ const Rating = ({ dishes }) => {
   }, [newDishes]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen">
       <Navbar />
-      <div className="flex flex-col justify-center items-center p-6 space-y-4 mt-12">
-        <div className="flex flex-col items-center space-y-8">
-          <h2 className="text-4xl font-bold w-full text-center">Rating</h2>
-          <p className="text-lg font-bold w-2/3 text-center text-accent">
+      <div className="flex flex-col justify-center items-center h-full p-6 space-y-4 mt-12">
+        <div className="flex flex-col items-center justify-center h-full space-y-4">
+          {/* <h2 className="text-4xl font-bold w-full text-center">Rating</h2> */}
+          {/* <p className="text-lg font-bold w-2/3 text-center text-accent">
             Tips: Swipe left to dislike, swipe right to like
-          </p>
+          </p> */}
           {newDishes.length > 0 && (
             <h2 className="text-4xl font-bold w-full text-center">{message}</h2>
           )}

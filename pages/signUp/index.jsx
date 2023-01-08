@@ -85,7 +85,7 @@ export default function SignUp() {
             </label>
             <input
               type="text"
-              placeholder="Sutdent ID"
+              placeholder="Password"
               className="input input-bordered w-full"
               {...register("password", { required: true })}
             />
