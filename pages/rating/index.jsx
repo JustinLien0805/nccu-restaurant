@@ -12,7 +12,7 @@ const Rating = ({ dishes }) => {
   const [message, setMessage] = useState("");
   const [removeId, setRemoveId] = useState(0);
   const [newDishes, setNewDishes] = useState(dishes);
-  
+
   function removeItem(id) {
     console.log("remove", id);
     setNewDishes(newDishes.filter((dish) => dish.id !== id));
@@ -48,7 +48,7 @@ const Rating = ({ dishes }) => {
           {newDishes.length > 0 && (
             <h2 className="text-4xl font-bold w-full text-center">{message}</h2>
           )}
-          <div className="stack" >
+          <div className="stack">
             <RatingCardList
               dishes={newDishes}
               removeItem={removeItem}
