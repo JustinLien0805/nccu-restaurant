@@ -28,7 +28,6 @@ export default function Home() {
           // store jwt token in local storage
           localStorage.setItem("token", res.data.token);
           router.push("/order");
-          setLoading(false);
         } else {
           setError(res.data.error);
           setLoading(false);
@@ -45,7 +44,7 @@ export default function Home() {
       <Navbar />
       <div className="flex flex-col min-h-screen justify-center items-center space-y-4 relative">
         {loading && <Loader />}
-        
+
         <h1 className="text-5xl font-bold">Sign In</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}

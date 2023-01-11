@@ -40,15 +40,11 @@ const Rating = ({ dishes }) => {
     <div className="flex flex-col h-screen">
       <Navbar />
       <div className="flex flex-col justify-center items-center h-full p-6 space-y-4 mt-12">
-        <div className="flex flex-col items-center justify-center h-full space-y-4">
-          {/* <h2 className="text-4xl font-bold w-full text-center">Rating</h2> */}
-          {/* <p className="text-lg font-bold w-2/3 text-center text-accent">
-            Tips: Swipe left to dislike, swipe right to like
-          </p> */}
+        <div className="flex flex-col items-center justify-center h-full">
           {newDishes.length > 0 && (
             <h2 className="text-4xl font-bold w-full text-center">{message}</h2>
           )}
-          <div className="stack">
+          <div className="stack mt-10">
             <RatingCardList
               dishes={newDishes}
               removeItem={removeItem}
@@ -61,7 +57,7 @@ const Rating = ({ dishes }) => {
           </div>
 
           {newDishes.length > 0 && (
-            <div className="flex space-x-20">
+            <div className="flex space-x-20 mt-10">
               <HiXCircle
                 className="flex-1 w-20 h-20 cursor-pointer hover:scale-110"
                 onClick={() => {

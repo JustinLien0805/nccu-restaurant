@@ -28,7 +28,7 @@ const MenuCard = ({ id, name, ingredients, type, image }) => {
 
   return (
     <>
-      <div className="card bg-gray-700 shadow-xl" htmlFor={name}>
+      <div className="card bg-gray-700 shadow-xl aspect-video" htmlFor={name}>
         <figure>
           <img
             src={image}
