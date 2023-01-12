@@ -4,7 +4,7 @@ const RatingCard = ({ dish, removeItem, setMessage, handleRating }) => {
   return (
     <>
       <motion.div
-        className="card bg-gray-700 shadow-xl active:scale-105 aspect-video"
+        className="card bg-gray-700 shadow-xl active:scale-105 h-[28rem] w-[22rem] lg:w-96"
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         whileDrag={{ scale: 1.05 }}
