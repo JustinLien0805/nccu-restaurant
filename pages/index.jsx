@@ -52,7 +52,7 @@ export default function Home() {
         >
           <div className="form-control w-full max-w-md">
             <label className="label">
-              <span className="label-text">Student ID</span>
+              <span className="label-text">Student ID (Demo ID: 1)</span>
             </label>
             <input
               type="text"
@@ -71,7 +71,7 @@ export default function Home() {
 
           <div className="form-control w-full max-w-md">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text">Password (Demo Password:1)</span>
             </label>
             <input
               type="text"
